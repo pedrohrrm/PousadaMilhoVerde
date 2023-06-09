@@ -1,0 +1,22 @@
+[
+  {
+    "conta": 0.0,
+    "nome": "pedro",
+    "endereco": "rua",
+    "email": "email",
+    "cpf": "123",
+    "telefone": "tel",
+    "nivelAcesso": false,
+    "id": 0
+  },
+  {
+    "conta": 0.0,
+    "nome": "Paulo",
+    "endereco": "Rua X",
+    "email": "paulo@email.com",
+    "cpf": "321",
+    "telefone": "35352222",
+    "nivelAcesso": false,
+    "id": 0
+  }
+]

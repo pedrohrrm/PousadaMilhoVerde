@@ -1,5 +1,6 @@
 package pousada;
 
+import arquivo.Arquivo;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,9 +12,9 @@ public class Cliente extends Pessoa {
 
     public Cliente() {
     }
-
     private double conta; //gastos do cliente
     private String codigo;
+    protected static int numTotalInstancias = 0;
 
     public String getCodigo() {
         codigo = this.getCpf();
@@ -28,7 +29,11 @@ public class Cliente extends Pessoa {
 
     public Cliente(String nome, String endereco, String email, String cpf, String telefone) {
         super(nome, endereco, email, cpf, telefone);
-
+        numTotalInstancias = numTotalInstancias +1;
+    }
+     
+    public static int getNumTotalInstancias() {
+        return numTotalInstancias;
     }
 
 //MÉTODOS PARA IMPRIMIR AS INFORMAÇÕES
@@ -53,12 +58,24 @@ public class Cliente extends Pessoa {
     }
 
 //ARRAYLIST E CRUD*******
+    
+    
+    
+    
     public void menuCliente() {
         Scanner scanner = new Scanner(System.in);
+        
         ArrayList<Cliente> listaCliente = new ArrayList();
-
+        listaCliente = (ArrayList<Cliente>) Arquivo.lerClientes();
+        //fazer a lista receber os dados do arquivo
+        
+        
+        
+        
+        
+        
+        
         boolean menuLoop = true;
-
         while (menuLoop) {
             System.out.println("======|MENU CLIENTE|======");
             System.out.println("[1] - Cadastro de Cliente");
@@ -83,7 +100,6 @@ public class Cliente extends Pessoa {
                     String cpf = scanner.nextLine();
                     System.out.println("Digite o telefone do cliente: ");
                     String telefone = scanner.nextLine();
-
                     //Instanciando novos objetos cliente , atribuir os valores necessários
                     Cliente c = new Cliente(nome, endereco, email, cpf, telefone);
                     c.setNome(nome);
@@ -92,8 +108,10 @@ public class Cliente extends Pessoa {
                     c.setCpf(cpf);
                     c.setTelefone(telefone);
 
+                    
                     // adcionar o objeto c no arrayList cliente
                     listaCliente.add(c);
+                    Arquivo.salvarClientes(listaCliente);
                     break;
 
                 }
@@ -115,6 +133,7 @@ public class Cliente extends Pessoa {
                             System.out.println("Telefone: " + cliTemporario.getTelefone());
                             localizado = true;
                             break;
+                            
                         }
                     }
                     if (localizado = false) {

@@ -19,9 +19,6 @@ public class Agenda extends Cliente{
     private String idCliente;
     private String idDespesa;
 
-    
-
-
     public Agenda() {
     }
 

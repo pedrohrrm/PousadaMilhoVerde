@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package pousada;
 
 import java.util.ArrayList;
@@ -36,7 +33,8 @@ public class Proprietario extends Pessoa{
             System.out.println("[3] - Atualizar Funcionário");
             System.out.println("[4] - Remover Funcionário");
             System.out.println("[5] - Listar Funcionários");
-            System.out.println("[6] - Sair");
+            System.out.println("[6] - Balanço mensal");
+            System.out.println("[8] - Sair");
             System.out.println("Digite o que quer fazer: ");
             String escolha = scanner.nextLine();
             switch(escolha){
@@ -129,7 +127,12 @@ public class Proprietario extends Pessoa{
                     }
                     break;
                 }
-                case "6": {
+                case "6":{
+                    //aqui vai ser para o balanço
+                    
+                    break;
+                }
+                case "7": {
                     menuLoop = false;
                     break;
                 }

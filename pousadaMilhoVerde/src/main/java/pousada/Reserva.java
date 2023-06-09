@@ -113,6 +113,7 @@ public class Reserva extends Agenda {
                     String dataReserva = scanner.nextLine();
                     System.out.println("Digite o preço total da Reserva: ");
                     double preco = scanner.nextDouble();
+                    scanner.nextLine();
                     System.out.println("Digite o numero do Cartão do Cliente: ");
                     String cartao = scanner.nextLine();
                     System.out.println("Digite o numero do Apartamento: ");
@@ -139,11 +140,11 @@ public class Reserva extends Agenda {
                     boolean localizado = false; //Exibir mensagem que reserva foi localizada.
                     for (int i = 0; i < listaReserva.size(); i++) {
                         Reserva resTemporaria = listaReserva.get(i);
-                        if (cpf.equals(resTemporaria)) {
+                        if (cpf.equals(resTemporaria.getCpf())) {
                             System.out.println("RESERVA LOCALIZADA");
                             System.out.println("Dados da reserva" + i + ": ");
                             System.out.println("CPF: " + resTemporaria.getCpf());
-                            System.out.println("Data: " + resTemporaria.getData());
+                            System.out.println("Data: " + resTemporaria.getDataReserva());
                             System.out.println("Valor total: " + resTemporaria.getPreco());
                             System.out.println("Número do cartão utilizado: " + resTemporaria.getCartao());
                             System.out.println("Número do Quarto: " + resTemporaria.getQuarto());
@@ -192,6 +193,44 @@ public class Reserva extends Agenda {
                     System.out.println("Digite o número da reserva que deseja remover: ");
                     String resNum = scanner.nextLine();
                     listaReserva.remove(resNum);
+                    
+                    
+                    
+
+
+
+
+
+
+
+
+
+                    
+                    
+                    
+//                    foreach para remover reservas não confirmadas em 30 dias
+//                    
+//                    for(Reserva res: listaReserva){
+//                        res.dataReserva > dataLocal+30;
+//                        listaReserva.remove(res)
+//                    }
+//                    LocalDate dataAtual = LocalDate.now();
+//        // Adicionar 30 dias à data atual
+//        LocalDate dataCom30Dias = dataAtual.plus(30, ChronoUnit.DAYS);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                     break;
                 }
@@ -201,11 +240,11 @@ public class Reserva extends Agenda {
                         Reserva resTemporaria = listaReserva.get(i);
                         System.out.println("Dados da reserva" + i + ":");
                         System.out.println("CPF: " + resTemporaria.getCpf());
-                        System.out.println("Data: " + resTemporaria.getData());
+                        System.out.println("Data: " + resTemporaria.getDataReserva());
                         System.out.println("Valor total: " + resTemporaria.getPreco());
                         System.out.println("Número do cartão utilizado: " + resTemporaria.getCartao());
                         System.out.println("Número do Quarto: " + resTemporaria.getQuarto());
-                        if (preliminar = true) {
+                        if (resTemporaria.isPreliminar() == true) {
                             System.out.println("Status da reserva = NÃO CONFIRMADA");
                         } else {
                             System.out.println("Status da Reserva = CONFIRMADA");

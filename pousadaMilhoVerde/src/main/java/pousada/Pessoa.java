@@ -4,7 +4,9 @@ package pousada;
  * @author Pedro Henrique
  */
 public abstract class Pessoa {
-   private String nome, endereco, email, cpf, telefone;
+
+    String nome;
+   private String endereco, email, cpf, telefone;
    private boolean nivelAcesso;
    private int id;
 
