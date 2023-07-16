@@ -1,42 +1,21 @@
 [
   {
-    "conta": 0.0,
-    "nome": "pedro",
-    "endereco": "rua",
-    "email": "email",
-    "cpf": "123",
-    "telefone": "tel",
+    "nome": "Pedrao",
+    "cpf": "asdfasdf",
     "nivelAcesso": false,
     "id": 0
   },
   {
-    "conta": 0.0,
-    "nome": "Paulo",
-    "endereco": "Rua X",
-    "email": "paulo@email.com",
-    "cpf": "321",
-    "telefone": "35352222",
-    "nivelAcesso": false,
+    "nome": "pedrim",
+    "senha": "corngreen",
+    "nivelAcesso": true,
     "id": 0
   },
   {
-    "conta": 0.0,
-    "nome": "Henrique",
-    "endereco": "Rua Y",
-    "email": "henrique@email.com",
-    "cpf": "00000011119",
-    "telefone": "3838383838",
-    "nivelAcesso": false,
-    "id": 0
-  },
-  {
-    "conta": 0.0,
-    "nome": "1234",
-    "endereco": "11234",
-    "email": "1234",
-    "cpf": "1234",
-    "telefone": "1234",
-    "nivelAcesso": false,
+    "nome": "ALADIN",
+    "cpf": "456987",
+    "senha": "corngreen",
+    "nivelAcesso": true,
     "id": 0
   }
 ]

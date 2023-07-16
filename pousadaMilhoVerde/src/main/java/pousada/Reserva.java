@@ -5,10 +5,12 @@
 package pousada;
 
 import arquivo.Arquivo;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
-
+import sistema.Balancos;
 
 /**
  *
@@ -18,30 +20,52 @@ public class Reserva extends Agenda {
 
     private boolean preliminar;
     private double preco;
-    private int quarto;
+    private int quarto, dias;
     private String dataReserva;
     private String cartao; //colocar no sistema método pgto
+    protected static int numTotalInstanciasRes = 0;
+    private static int numTotalInstanciasPrivadoRes = 0;
+    private String tipoQuarto;
+    private boolean confirmada;
+    private String dataConfirmacao;
 
     public Reserva() {
         this.preliminar = true;
+        numTotalInstanciasRes = numTotalInstanciasRes + 1;
+        numTotalInstanciasPrivadoRes = numTotalInstanciasPrivadoRes + 1;
     }
 
-    public Reserva(boolean preliminar, double preco, int quarto, String dataReserva, String cartao) {
-        this.preliminar = true;
+    public Reserva(boolean preliminar, double preco, int quarto, int dias, String dataReserva, String cartao, String tipoQuarto) {
         this.preliminar = preliminar;
         this.preco = preco;
         this.quarto = quarto;
+        this.dias = dias;
         this.dataReserva = dataReserva;
         this.cartao = cartao;
+        this.tipoQuarto = tipoQuarto;
+        this.confirmada = false;
+        numTotalInstanciasRes = numTotalInstanciasRes + 1;
+        numTotalInstanciasPrivadoRes = numTotalInstanciasPrivadoRes + 1;
     }
 
-    public Reserva(boolean preliminar, double preco, int quarto, String cartao, int totalDeReservas, String idReserva, int numeroQuarto, LocalDateTime data, String idCliente, String idDespesa) {
-        super(totalDeReservas, idReserva, numeroQuarto, data, idCliente, idDespesa);
-        this.preliminar = true;
-        this.preliminar = preliminar;
-        this.preco = preco;
-        this.quarto = quarto;
-        this.cartao = cartao;
+    public static int getNumTotalInstanciasPrivadoRes() {
+        return numTotalInstanciasPrivadoRes;
+    }
+
+    public int getDias() {
+        return dias;
+    }
+
+    public void setDias(int dias) {
+        this.dias = dias;
+    }
+
+    public boolean getConfirmada() {
+        return this.confirmada;
+    }
+
+    public void setConfirmada() {
+        this.confirmada = true;
     }
 
     public String getDataReserva() {
@@ -61,6 +85,7 @@ public class Reserva extends Agenda {
     }
 
     public double getPreco() {
+
         return preco;
     }
 
@@ -84,15 +109,72 @@ public class Reserva extends Agenda {
         this.cartao = cartao;
     }
 
+    public String getTipoQuarto() {
+        return tipoQuarto;
+    }
+
+    public void setTipoQuarto(String tipoQuarto) {
+        this.tipoQuarto = tipoQuarto;
+    }
+
+    public static boolean verificarReservaExistente(List<Reserva> listaReservas, String dataReserva, String tipoQuarto) {
+        LocalDate dataReservaLocalDate = LocalDate.parse(dataReserva, DateTimeFormatter.ofPattern("ddMMyyyy"));
+        for (Reserva reserva : listaReservas) {
+            if (dataReservaLocalDate.equals(reserva.getDataReserva()) && tipoQuarto != null && tipoQuarto.equalsIgnoreCase(reserva.getTipoQuarto())) {
+                return true; // Já existe uma reserva para a data e tipo de quarto informados
+            }
+        }
+        return false;
+    }
+
+    public void confirmarReserva(String dataConfirmacaoStr) {
+        if (preliminar && !confirmada) {
+            // Verificar se a data de confirmação já foi preenchida
+            if (dataConfirmacao != null) {
+                System.out.println("A reserva já foi confirmada anteriormente.");
+                return;
+            }
+
+            // Confirma a reserva
+            this.confirmada = true;
+            //LocalDate dataConfirmacao = LocalDate.parse(dataConfirmacaoStr, DateTimeFormatter.ofPattern("ddMMyyyy"));
+            this.dataConfirmacao = dataConfirmacao;
+
+            // Realizar o débito de uma diária no cartão do cliente (coloque a lógica aqui)
+            System.out.println("Reserva confirmada! Foi debitada uma diária no cartão do cliente.");
+        } else {
+            System.out.println("A reserva não pode ser confirmada.");
+        }
+    }
+
+    public boolean isConfirmada() {
+        return confirmada;
+    }
+
+    private static boolean verificarDataDentroDoPrazo(String dataReserva, String dataConfirmacao) {
+        LocalDate dataReservaLocalDate = LocalDate.parse(dataReserva, DateTimeFormatter.ofPattern("ddMMyyyy"));
+        LocalDate dataConfirmacaoLocalDate = LocalDate.parse(dataConfirmacao, DateTimeFormatter.ofPattern("ddMMyyyy"));
+
+        return dataConfirmacaoLocalDate.isBefore(dataReservaLocalDate);
+    }
+
+    private static String adicionarDias(String data, int dias) {
+        LocalDate dataLocalDate = LocalDate.parse(data, DateTimeFormatter.ofPattern("ddMMyyyy"));
+        LocalDate novaDataLocalDate = dataLocalDate.plusDays(dias);
+        return novaDataLocalDate.format(DateTimeFormatter.ofPattern("ddMMyyyy"));
+    }
+
     @Override
     public String toString() {
-        return "Reserva{" + "preliminar=" + preliminar + ", preco=" + preco + ", quarto=" + quarto + ", cartao=" + cartao + '}';
+        return "Reserva{" + "preliminar=" + preliminar + ", preco=" + preco + ", quarto=" + quarto + ", dias=" + dias + ", dataReserva=" + dataReserva + ", cartao=" + cartao + '}';
     }
 
     //CRUD DA RESERVA.
     public void menuReserva() {
         Scanner scanner = new Scanner(System.in);
+        ArrayList<Balancos> listaBalanco = new ArrayList();
         ArrayList<Reserva> listaReserva = new ArrayList();
+        listaBalanco =  Arquivo.lerBalanco();
         listaReserva = (ArrayList<Reserva>) Arquivo.lerReserva();
 
         boolean menuLoop = true;
@@ -104,7 +186,8 @@ public class Reserva extends Agenda {
             System.out.println("[4] - Remover Reserva");
             System.out.println("[5] - Listar Reservas");
             System.out.println("[6] - Confirmar Reserva");
-            System.out.println("[7] - Sair");
+            System.out.println("[7] - Despesas Cliente");
+            System.out.println("[8] - Sair");
             System.out.println("Digite o que quer fazer: ");
             String escolha = scanner.nextLine();
             switch (escolha) {
@@ -112,27 +195,71 @@ public class Reserva extends Agenda {
                     System.out.println("======|NOVA RESERVA|======");
                     System.out.println("Digite o CPF: ");
                     String cpf = scanner.nextLine();
+
+                    System.out.println("Digite o tipo de quarto desejado (Luxo ou Simples): ");
+                    String tipoQuarto = scanner.nextLine().toLowerCase();
+
+                    double diaria;
+                    if (tipoQuarto.equalsIgnoreCase("Luxo")) {
+                        diaria = 399.0;
+                    } else if (tipoQuarto.equalsIgnoreCase("Simples")) {
+                        diaria = 99.0;
+                    } else {
+                        System.out.println("Tipo de quarto inválido!");
+                        break; // Voltar ao menu principal
+                    }
+
                     System.out.println("Digite a data da reserva (ddMMaaaa): ");
                     String dataReserva = scanner.nextLine();
-                    System.out.println("Digite o preço total da Reserva: ");
-                    double preco = scanner.nextDouble();
+
+                    // Verificar se já existe uma reserva na data informada e no tipo de quarto desejado
+                    boolean existeReserva = Reserva.verificarReservaExistente(listaReserva, dataReserva, tipoQuarto);
+                    if (existeReserva) {
+                        System.out.println("Já existe uma reserva para a data e tipo de quarto informados!");
+                        break; // Voltar ao menu principal
+                    }
+
+                    System.out.println("Digite o total de dias para reservas: ");
+                    int dias = scanner.nextInt();
                     scanner.nextLine();
                     System.out.println("Digite o numero do Cartão do Cliente: ");
                     String cartao = scanner.nextLine();
                     System.out.println("Digite o numero do Apartamento: ");
                     int quarto = scanner.nextInt();
 
+                    // Calcular o valor total da reserva
+                    double valorTotal = diaria * dias;
+
                     //Instanciando novas reservas
-                    Reserva r = new Reserva(preliminar, preco, quarto, dataReserva, cartao);
-                    r.setPreliminar(preliminar = true);
+                    Reserva r = new Reserva(true, valorTotal, quarto, dias, dataReserva, cartao, tipoQuarto);
                     r.setCpf(cpf);
                     r.setDataReserva(dataReserva);
-                    r.setPreco(preco);
+                    r.setDias(dias);
                     r.setCartao(cartao);
                     r.setQuarto(quarto);
 
                     //add o objeto R do tipo reserva no ArrayList reserva
                     listaReserva.add(r);
+                    Arquivo.salvarReserva(listaReserva);
+
+                    scanner.nextLine();
+                    // Exibir informações da reserva
+                    System.out.println("Reserva criada com sucesso!");
+                    System.out.println("Apartamento escolhido: nº " + quarto);
+                    System.out.println("Tipo de quarto: " + tipoQuarto);
+                    System.out.println("Valor total da reserva: R$ " + valorTotal);
+
+                    // Confirmar reserva
+                    System.out.println("Deseja confirmar a reserva? (S/N)");
+                    String confirmacao = scanner.nextLine();
+                    if (confirmacao.equalsIgnoreCase("S")) {
+                        r.setPreliminar(false);
+                        System.out.println("Reserva confirmada!");
+                    } else {
+                        listaReserva.remove(r);
+                        System.out.println("Reserva cancelada!");
+                    }
+
                     break;
                 }
                 case "2": {
@@ -191,27 +318,53 @@ public class Reserva extends Agenda {
                     for (int i = 0; i < listaReserva.size(); i++) {
                         Reserva resTemporaria = listaReserva.get(i);
                         System.out.println("[" + i + "]" + resTemporaria.getCpf());
+                    }
+
+                    System.out.println("Digite o CPF do cliente para confirmar a reserva:");
+                    String cpf = scanner.nextLine();
+
+                    for (Reserva r : listaReserva) {
+
+                        if (cpf.equals(r.getCpf())) {
+                            LocalDate dataMaquina = LocalDate.now();
+                            String dataAtual = dataMaquina.format(DateTimeFormatter.ofPattern("ddMMyyyy"));
+
+                            String dataReservaCliente = r.getDataReserva();
+
+                            LocalDate dataReservaDate = LocalDate.parse(dataReservaCliente, DateTimeFormatter.ofPattern("ddMMyyyy"));
+                            LocalDate dataReservaMais7Dias = dataReservaDate.plusDays(7);
+
+                            String dataReserva7Dias = dataReservaMais7Dias.format(DateTimeFormatter.ofPattern("ddMMyyyy"));
+
+                            var x = Integer.parseInt(dataAtual);
+                            var y = Integer.parseInt(dataReserva7Dias);
+                            Balancos b = new Balancos();
+
+                            if (y <= x) {
+                                r.setConfirmada();
+                                System.out.println("Valor R$" + (r.getPreco() / 2) + " , debitado no cartão cadastrado.");
+                                
+                                //Preenchendo o BALANÇO
+                                b.setCpf(r.getCpf());
+                                b.setConta(r.getConta());
+                                b.setPreco(r.getPreco());
+                                b.setMes(dataReservaCliente);
+                                listaBalanco.add(b);
+                                Arquivo.salvarBalanco(listaBalanco);
+                                
+                                listaReserva.remove(r);
+                                Arquivo.salvarReserva(listaReserva);
+                            } else {
+                                System.out.println("Valor R$" + r.getPreco() + " , debitado no cartão cadastrado.");
+                                System.out.println("Reserva excluida.");
+                                listaReserva.remove(r);
+                                Arquivo.salvarReserva(listaReserva);
+                            }
+                            break;
+                        }
 
                     }
-                    System.out.println("Digite o número da reserva que deseja remover: ");
-                    String resNum = scanner.nextLine();
-                    listaReserva.remove(resNum);
-                    
-                    
-                    
 
-
-
-
-
-
-
-
-
-                    
-                    
-                    
-                                        break;
                 }
                 case "5": {
                     System.out.println("======|LISTAR RESERVAS|======");
@@ -234,38 +387,67 @@ public class Reserva extends Agenda {
                 }
                 case "6": {
                     System.out.println("======|CONFIRMAR RESERVA|======");
-                    for (int i = 0; i < listaReserva.size(); i++) {
+                    System.out.println("Digite o CPF do cliente para confirmar a reserva:");
+                    String cpf = scanner.nextLine();
+
+                    for (Reserva r : listaReserva) {
+                        if (cpf.equals(r.getCpf())) {
+                            System.out.println(r.getCpf());
+
+                            //Verificação da data da reserva.
+                            LocalDate dataMaquina = LocalDate.now();
+                            LocalDate dataAtualMais30Dias = dataMaquina.plusDays(30);
+                            String dataAtual = dataMaquina.format(DateTimeFormatter.ofPattern("ddMMyyyy"));
+
+                            String dataReservaCliente = r.getDataReserva();
+                            var x = Integer.parseInt(dataAtual);
+                            var y = Integer.parseInt(dataReservaCliente);
+
+                            if (y <= x) {
+                                r.setConfirmada();
+                                System.out.println("Valor R$" + r.getPreco() + " , debitado no cartão cadastrado.");
+                                Arquivo.salvarReserva(listaReserva);
+                            } else {
+                                System.out.println("Reserva fora do prazo de confirmação!");
+                                System.out.println("Reserva excluida.");
+                                listaReserva.remove(r);
+                                Arquivo.salvarReserva(listaReserva);
+                            }
+                        }
+                        break;
+                    }
+                }
+                case "7": {
+                    System.out.println("======|Adicionar Dispesa|======");
+                     for (int i = 0; i < listaReserva.size(); i++) {
                         Reserva resTemporaria = listaReserva.get(i);
                         System.out.println("[" + i + "]" + resTemporaria.getCpf());
                     }
-                    System.out.println("Digite o número de acordo com a reserva que quer confirmar: ");
-                    int resNum = scanner.nextInt();
-                    scanner.nextLine();
 
-                    Reserva r = listaReserva.get(resNum);
-                    r.setPreliminar(preliminar = false);
-                    System.out.println("RESERVA CONFIRMADA!");
+                    System.out.println("Digite o CPF do cliente para confirmar a reserva:");
+                    String cpf = scanner.nextLine();
+                    for (Reserva r : listaReserva) {
+
+                        if (cpf.equals(r.getCpf())) {
+                            
+                            System.out.println("Digite o valor da despesa: ");
+                            Double conta = scanner.nextDouble();
+                            Double contaAtual = r.getConta();
+                            contaAtual += conta;
+                            r.setConta(contaAtual);
+                            Arquivo.salvarReserva(listaReserva);
+                            break;
+                        }
+
+                    }
                 }
-                break;
-                case "7": {
+
+                case "8": {
                     menuLoop = false;
                     break;
                 }
             }
 
         }
-    }
-    
-    public static void verificaReservas()
-    {
-//        //foreach para remover reservas não confirmadas em 30 dias
-//                    
-//                    for(Reserva res: listaReserva){
-//                        res.dataReserva > dataLocal+30;
-//                        listaReserva.remove(res)
-//                    }
-//                    LocalDate dataAtual = LocalDate.now();
-//        // Adicionar 30 dias à data atual
-//        LocalDate dataCom30Dias = dataAtual.plus(30, ChronoUnit.DAYS);
     }
 }

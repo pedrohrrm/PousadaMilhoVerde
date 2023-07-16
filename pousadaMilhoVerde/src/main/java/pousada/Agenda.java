@@ -4,25 +4,23 @@
  */
 package pousada;
 
-import java.time.LocalDateTime;
-
 /**
  *
  * @author Pedro Henrique
  */
-public class Agenda extends Cliente{
+public class Agenda extends Cliente {
 
     private int totalDeReservas;
     private String idReserva;
     private int numeroQuarto;
-    private LocalDateTime data;
+    private String data;
     private String idCliente;
     private String idDespesa;
 
     public Agenda() {
     }
 
-    public Agenda(int totalDeReservas, String idReserva, int numeroQuarto, LocalDateTime data, String idCliente, String idDespesa) {
+    public Agenda(int totalDeReservas, String idReserva, int numeroQuarto, String data, String idCliente, String idDespesa) {
         this.totalDeReservas = totalDeReservas;
         this.idReserva = idReserva;
         this.numeroQuarto = numeroQuarto;
@@ -30,9 +28,7 @@ public class Agenda extends Cliente{
         this.idCliente = idCliente;
         this.idDespesa = idDespesa;
     }
-    
 
-    
     public int getTotalDeReservas() {
         return totalDeReservas;
     }
@@ -57,11 +53,11 @@ public class Agenda extends Cliente{
         this.numeroQuarto = numeroQuarto;
     }
 
-    public LocalDateTime getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(LocalDateTime data) {
+    public void setData(String data) {
         this.data = data;
     }
 
@@ -80,7 +76,8 @@ public class Agenda extends Cliente{
     public void setIdDespesa(String idDespesa) {
         this.idDespesa = idDespesa;
     }
-        @Override
+    
+    @Override
     public String toString() {
         return "Agenda{" + "totalDeReservas=" + totalDeReservas + ", idReserva=" + idReserva + ", numeroQuarto=" + numeroQuarto + ", data=" + data + ", idCliente=" + idCliente + ", idDespesa=" + idDespesa + '}';
     }

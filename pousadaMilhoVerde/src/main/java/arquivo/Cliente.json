@@ -21,21 +21,11 @@
   },
   {
     "conta": 0.0,
-    "nome": "Henrique",
-    "endereco": "Rua Y",
-    "email": "henrique@email.com",
-    "cpf": "00000011119",
-    "telefone": "3838383838",
-    "nivelAcesso": false,
-    "id": 0
-  },
-  {
-    "conta": 0.0,
-    "nome": "1234",
-    "endereco": "11234",
-    "email": "1234",
-    "cpf": "1234",
-    "telefone": "1234",
+    "nome": "132132",
+    "endereco": "13213213",
+    "email": "32132132",
+    "cpf": "3213213213",
+    "telefone": "2132132132132132132132",
     "nivelAcesso": false,
     "id": 0
   }

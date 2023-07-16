@@ -1,6 +1,7 @@
 
 package pousada;
 
+import arquivo.Arquivo;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -18,14 +19,17 @@ public class Funcionario extends Pessoa {
     
     
 
-    @Override
-    public boolean setNivelAcesso() {
-        return super.setNivelAcesso(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
-    }
+   
     public void menuFuncionario(){
+             
+        
+        
         Scanner scanner = new Scanner(System.in);
         ArrayList<Funcionario> listaFuncionario = new ArrayList();
+        listaFuncionario = (ArrayList<Funcionario>) Arquivo.lerColaborador();
         
+        ArrayList<Proprietario> listaProprietario = new ArrayList();
+        listaProprietario = (ArrayList<Proprietario>) Arquivo.lerProprietario();
         boolean menuLoop = true;
         
         while(menuLoop){
@@ -44,23 +48,56 @@ public class Funcionario extends Pessoa {
                     System.out.println("Digite o nome do Funcionário: ");
                     String nome = scanner.nextLine();
                     System.out.println("Digite o CPF: ");
-                    String cpf = scanner.nextLine();
-                    System.out.println("Nivel de acesso definido: Funcionário!");
+                    String cpf = scanner.nextLine();                        
+                    
+                    System.out.println("Será criada uma conta para PROPRIETÁRIO? (S/N)");
+                    String resposta = scanner.nextLine();
+
+                if (resposta.equalsIgnoreCase("S")) {
+                    System.out.println("Digite a senha de liberação para criar um proprietário:");
+                    String senha = scanner.nextLine();
+
+                    if (senha.equals("milhoverde")) {
+                        System.out.println("Nível de acesso definido: Proprietário!");
+                        String senhaPadrao = "corngreen";
+                        // Crie o objeto do proprietário com senhaPadrao
+                        Proprietario p = new Proprietario(nome, cpf, senha, menuLoop, 0);
+                        p.setNivelAcesso(true);
+                        p.setSenha(senhaPadrao);
+                        p.setNome(nome);
+                        p.setCpf(cpf);
+                        int i = 0;
+                        p.setId(i);
+                        i++;
+                                           
+                        listaProprietario.add(p);
+                        Arquivo.salvarProprietario(listaProprietario);
+                    
+                    
+                    } else {
+                        System.out.println("Senha incorreta. Ação cancelada.");
+                    }
+                } else {
+                    System.out.println("Nível de acesso definido: Funcionário!");
                     int i = 0;
-                    
-                    
-                    //intanciar funcionário
+                     //intanciar funcionário
                     Funcionario f = new Funcionario(nome, cpf, super.isNivelAcesso(), 0);
                     f.setNome(nome);
                     f.setCpf(cpf);
-                    boolean setNivelAcesso = f.setNivelAcesso();
                     f.setId(i);
                     i++;
                     
                 //add o objeto f do tipo funcionario no ArrayList listaFuncionario
                 listaFuncionario.add(f);
+                Arquivo.salvarColaborador(listaFuncionario);
+                        
+                    
+                    
+                    
+                   
+                
                     break;
-                }
+                }}
                 case "2": {
                     System.out.println("======|PROCURAR FUNCIONÁRIO|======");
                     System.out.println("Digite o cpf do Funcionário:");

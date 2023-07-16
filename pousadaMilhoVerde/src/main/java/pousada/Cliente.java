@@ -42,6 +42,14 @@ public class Cliente extends Pessoa implements Comparator <Cliente>{
     //verificar se precisa de id ou se vai herdar
     //fazer o toString
 
+    public double getConta() {
+        return conta;
+    }
+
+    public void setConta(double conta) {
+        this.conta = conta;
+    }
+
   
 
     public static int getNumTotalInstancias() {

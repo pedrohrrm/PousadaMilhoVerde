@@ -9,12 +9,17 @@ public class Quarto {
     int [] aptoLuxo = new int [5];
     int [] aptoSimples = new int [5];
 
+
     public Quarto() {
     }
 
     public Quarto(double diaria, double despesas) {
         this.diaria = diaria;
         this.despesas = despesas;
+    }
+
+    Quarto(double d) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
@@ -53,15 +58,8 @@ public class Quarto {
     public void setAptoSimples(int[] aptoSimples) {
         this.aptoSimples = aptoSimples;
     }
+public double calcularValorTotal(int numDias) {
+        return diaria * numDias;
+    }
 
-//    public double diariaLuxo(){
-//        Quarto lux = new Quarto();
-//        lux.diaria = 389.90;
-//        return diaria;
-//    }
-//    public double diariaSimples(){
-//        Quarto simp = new Quarto();
-//        simp.diaria = 99.99;
-//        return diaria;
-//    }
 }

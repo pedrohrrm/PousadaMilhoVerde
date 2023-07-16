@@ -5,8 +5,13 @@ package pousada;
  */
 public abstract class Pessoa {
 
+    String nome;
+    String endereco;
+    String email;
+    String cpf;
+
   
-   private String nome, endereco, email, cpf, telefone;
+   private String telefone, senha;
    private boolean nivelAcesso;
    private int id;
 
@@ -17,6 +22,16 @@ public abstract class Pessoa {
 
     public Pessoa() {
     }
+    //criar proprietario
+
+    public Pessoa(String nome, String cpf, String senha, boolean nivelAcesso, int id) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.senha = senha;
+        this.nivelAcesso = nivelAcesso;
+        this.id = id;
+    }
+    
 //criar funcionário
     public Pessoa(String nome, String cpf, boolean nivelAcesso, int id) {
         this.nome = nome;
@@ -32,6 +47,14 @@ public abstract class Pessoa {
         this.email = email;
         this.cpf = cpf;
         this.telefone = telefone;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     public String getNome() {
@@ -77,12 +100,10 @@ public abstract class Pessoa {
     public boolean isNivelAcesso() {
         return nivelAcesso;
     }
+public void setNivelAcesso(boolean nivelAcesso) {
+    this.nivelAcesso = nivelAcesso;
+}
 
-    public boolean setNivelAcesso() {
-       this.nivelAcesso = nivelAcesso;
-       return false;
-        
-    }
 
     
 

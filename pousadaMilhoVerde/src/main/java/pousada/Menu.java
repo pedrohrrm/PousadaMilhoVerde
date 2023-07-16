@@ -2,6 +2,7 @@
 package pousada;
 
 import java.util.Scanner;
+import sistema.Balancos;
 
 /**
  *
@@ -43,7 +44,9 @@ public class Menu {
                     break;
                 }
                 case "4":{
-                    break;
+                   Balancos b = new Balancos();
+                   b.menuBalanco();
+                   break;
                 }
                 case "5":{
                     
