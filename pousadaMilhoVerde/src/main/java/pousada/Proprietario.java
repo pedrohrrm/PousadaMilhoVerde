@@ -14,7 +14,7 @@ public class Proprietario extends Pessoa{
     }
 
     public Proprietario(String nome, String cpf, boolean nivelAcesso, int id) {
-        super(nome, cpf, nivelAcesso, id);
+        super(nome, cpf, nivelAcesso = true, id);
     }
     
     //colocar algo para conferir o nível de acesso do funcionário antes de liberar as funçõe??

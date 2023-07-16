@@ -13,7 +13,7 @@ public class Funcionario extends Pessoa {
     }
 
     public Funcionario(String nome, String cpf, boolean nivelAcesso, int id) {
-        super(nome, cpf, nivelAcesso, id);
+        super(nome, cpf, nivelAcesso = false, id);
     }
     
     

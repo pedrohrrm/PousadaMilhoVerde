@@ -4,9 +4,11 @@
  */
 package pousada;
 
+import arquivo.Arquivo;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 
 /**
  *
@@ -91,6 +93,7 @@ public class Reserva extends Agenda {
     public void menuReserva() {
         Scanner scanner = new Scanner(System.in);
         ArrayList<Reserva> listaReserva = new ArrayList();
+        listaReserva = (ArrayList<Reserva>) Arquivo.lerReserva();
 
         boolean menuLoop = true;
         while (menuLoop) {
@@ -208,31 +211,7 @@ public class Reserva extends Agenda {
                     
                     
                     
-//                    foreach para remover reservas não confirmadas em 30 dias
-//                    
-//                    for(Reserva res: listaReserva){
-//                        res.dataReserva > dataLocal+30;
-//                        listaReserva.remove(res)
-//                    }
-//                    LocalDate dataAtual = LocalDate.now();
-//        // Adicionar 30 dias à data atual
-//        LocalDate dataCom30Dias = dataAtual.plus(30, ChronoUnit.DAYS);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    break;
+                                        break;
                 }
                 case "5": {
                     System.out.println("======|LISTAR RESERVAS|======");
@@ -276,5 +255,17 @@ public class Reserva extends Agenda {
 
         }
     }
-
+    
+    public static void verificaReservas()
+    {
+//        //foreach para remover reservas não confirmadas em 30 dias
+//                    
+//                    for(Reserva res: listaReserva){
+//                        res.dataReserva > dataLocal+30;
+//                        listaReserva.remove(res)
+//                    }
+//                    LocalDate dataAtual = LocalDate.now();
+//        // Adicionar 30 dias à data atual
+//        LocalDate dataCom30Dias = dataAtual.plus(30, ChronoUnit.DAYS);
+    }
 }

@@ -5,8 +5,8 @@ package pousada;
  */
 public abstract class Pessoa {
 
-    String nome;
-   private String endereco, email, cpf, telefone;
+  
+   private String nome, endereco, email, cpf, telefone;
    private boolean nivelAcesso;
    private int id;
 
