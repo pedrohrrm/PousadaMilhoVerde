@@ -1,19 +1,24 @@
 [
   {
-    "cpf": "321",
+    "descricao": "Agua",
+    "valor": 120.0,
+    "dataLancamento": "22072023",
+    "mesLancamento": "072023",
+    "totalDeReservas": 0,
+    "numeroQuarto": 0,
     "conta": 0.0,
-    "preco": 495.0
+    "nivelAcesso": false,
+    "id": 0
   },
   {
-    "cpf": "000",
-    "mes": "1998-01-01",
+    "descricao": "Luz",
+    "valor": 180.0,
+    "dataLancamento": "22072023",
+    "mesLancamento": "072023",
+    "totalDeReservas": 0,
+    "numeroQuarto": 0,
     "conta": 0.0,
-    "preco": 47880.0
-  },
-  {
-    "cpf": "000",
-    "mes": "01011998",
-    "conta": 1250.0,
-    "preco": 47880.0
+    "nivelAcesso": false,
+    "id": 0
   }
 ]

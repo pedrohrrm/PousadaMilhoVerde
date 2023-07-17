@@ -1,110 +1,60 @@
 
 package pousada;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+
+
 
 /**
  *
  * @author Pedro Henrique
  */
 public class Despesa extends Agenda {
-
-    private String idProduto;
-    private double valorProduto;
-    private String idContas;
-    private double valorContas;
-
-    @Override
-    public String toString() {
-        return "Despesa{" + "idProduto=" + idProduto + ", valorProduto=" + valorProduto + ", idContas=" + idContas + ", valorContas=" + valorContas + '}';
-    }
+private String descricao;
+    private double valor;
+    private String dataLancamento;
+    private String mesLancamento;
 
     public Despesa() {
     }
-
-    public String getIdProduto() {
-        return idProduto;
+    
+    public Despesa(String descricao, double valor, String dataLancamento, String mesLancamento) {
+        this.descricao = descricao;
+        this.valor = valor;
+        this.dataLancamento = dataLancamento;
+        this.mesLancamento = mesLancamento;
     }
 
-    public void setIdProduto(String idProduto) {
-        this.idProduto = idProduto;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public double getValorProduto() {
-        return valorProduto;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
-    public void setValorProduto(double valorProduto) {
-        this.valorProduto = valorProduto;
+    public double getValor() {
+        return valor;
     }
 
-    public String getIdContas() {
-        return idContas;
+    public void setValor(double valor) {
+        this.valor = valor;
     }
 
-    public void setIdContas(String idContas) {
-        this.idContas = idContas;
+    public String getDataLancamento() {
+        return dataLancamento;
     }
 
-    public double getValorContas() {
-        return valorContas;
+    public void setDataLancamento(String dataLancamento) {
+        this.dataLancamento = dataLancamento;
     }
 
-    public void setValorContas(double valorContas) {
-        this.valorContas = valorContas;
+    public String getMesLancamento() {
+        return mesLancamento;
     }
-    public void produtos(){
-        Despesa a = new Despesa();
-        a.setIdProduto("Refrigerante");
-        a.setValorProduto(3.95);
-        Despesa b = new Despesa();
-        b.setIdProduto("Almoco");
-        b.setValorProduto(20.99);
-        
+
+    public void setMesLancamento(String mesLancamento) {
+        this.mesLancamento = mesLancamento;
     }
-    public void menuDespesas(){
-        Scanner scanner = new Scanner(System.in);
-        ArrayList<Despesa> listaDespesa = new ArrayList();
-        
-        boolean menuLoop = true;
-        
-        while(menuLoop){
-            System.out.println("======|MENU DESPESAS CLIENTE|======");
-            System.out.println("[1] - Nova Despesa");
-            System.out.println("[2] - Procurar Despesa");
-            System.out.println("[3] - Atualizar Despesa");
-            System.out.println("[4] - Remover Despesa");
-            System.out.println("[5] - Listar Despesas");
-            System.out.println("[6] - Sair");
-            System.out.println("Digite o que quer fazer: ");
-            String escolha = scanner.nextLine();
-            switch(escolha){
-                case "1":{
-                    System.out.println("======|NOVA DESPESA|======");
-                    System.out.println("Digite o CPF para incluir gasto: ");
-                    String cpf = scanner.nextLine();
-                    System.out.println("Digite o Produto que deseja: ");
-                                       
-                    
-                    break;
-                }
-                case "2":{
-                    break;
-                }
-                case "3":{
-                    break;
-                }
-                case "4":{
-                    break;
-                }
-                case "5":{
-                    break;
-                }
-                case "6":{
-                    break;
-                }
-            }
-        }
-    }
+
+    
 }

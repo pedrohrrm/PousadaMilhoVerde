@@ -14,6 +14,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import pousada.Cliente;
+import pousada.Despesa;
 import pousada.Funcionario;
 import pousada.Proprietario;
 import pousada.Reserva;
@@ -30,6 +31,8 @@ public class Arquivo {
     private static final String END_ARQ_COLABORADOR = "./src/main/java/arquivo/Funcionario.json";    
     private static final String END_ARQ_PROPRIETARIO = "./src/main/java/arquivo/Proprietario.json";
     private static final String END_ARQ_BALANCO = "./src/main/java/arquivo/Balanco.json";
+    private static final String END_ARQ_DESPESAPOUSADA = "./src/main/java/arquivo/Despesapousada.json";
+
 
 
     public static void salvarClientes(List<Cliente> listaCliente) {
@@ -43,7 +46,7 @@ public class Arquivo {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Clientes salvos em ");
+        System.out.println("Clientes salvos em cliente.json ");
     }
 
     public static List<Cliente> lerClientes() {
@@ -72,7 +75,7 @@ public class Arquivo {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Reservas salvas em ");
+        System.out.println("Reservas salvas no Reserva.json ");
     }
 
    
@@ -88,7 +91,7 @@ public class Arquivo {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Funcionario salvos em ");
+        System.out.println("Funcionario salvos em funcionario.json");
     }
 
     public static ArrayList<Funcionario> lerColaborador() {
@@ -117,7 +120,7 @@ public class Arquivo {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Proprietario salvos em ");
+        System.out.println("Proprietario salvos em proprietario.json ");
     }
 
     public static ArrayList<Proprietario> lerProprietario() {
@@ -161,7 +164,7 @@ public class Arquivo {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Proprietario salvos em ");
+        System.out.println("Dados salvos em Balanco.json ");
     }
     
     public static ArrayList<Balancos> lerBalanco() {
@@ -178,5 +181,34 @@ public class Arquivo {
         }
 
         return listaBalancos;
+    }
+public static void salvarDespesaPousada(ArrayList<Despesa> listaDepesaPousada) {
+        // Converter a lista de Funcionario para JSON usando Gson
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String json = gson.toJson(listaDepesaPousada);
+
+        // Salvar o JSON em um arquivo
+        try (FileWriter writer = new FileWriter(END_ARQ_DESPESAPOUSADA)) {
+            writer.write(json);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Despesas salvos em DespesaPousada.json");
+    }
+
+    public static ArrayList<Despesa> lerDespesaPousada() {
+    ArrayList<Despesa> listaDepesaPousada = new ArrayList<>();
+
+        try (FileReader reader = new FileReader(END_ARQ_DESPESAPOUSADA)) {
+            // Ler o JSON do arquivo e converter para lista de Colaborador usando Gson
+            Gson gson = new Gson();
+            var listaDepesaPousadas = new TypeToken<List<Despesa>>() {
+            }.getType();
+            listaDepesaPousada = gson.fromJson(reader, listaDepesaPousadas);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return listaDepesaPousada;
     }
 }

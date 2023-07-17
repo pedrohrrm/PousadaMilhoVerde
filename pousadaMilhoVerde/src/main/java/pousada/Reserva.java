@@ -8,6 +8,7 @@ import arquivo.Arquivo;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 import sistema.Balancos;
@@ -164,6 +165,32 @@ public class Reserva extends Agenda {
         return novaDataLocalDate.format(DateTimeFormatter.ofPattern("ddMMyyyy"));
     }
 
+    public static void verificarReservasNaoConfirmadas(List<Reserva> listaReserva) {
+        LocalDate dataAtual = LocalDate.now();
+        boolean algumaReservaCancelada = false;
+
+        Iterator<Reserva> iterator = listaReserva.iterator();
+        while (iterator.hasNext()) {
+            Reserva reserva = iterator.next();
+            if (!reserva.isConfirmada()) {
+                LocalDate dataReservaCliente = LocalDate.parse(reserva.getDataReserva(), DateTimeFormatter.ofPattern("ddMMyyyy"));
+
+                if (dataReservaCliente.isBefore(dataAtual.plusDays(30))) {
+                    // A reserva não foi confirmada e está a menos de 30 dias da data da reserva
+                    // Então, vamos cancelar a reserva.
+                    iterator.remove(); // Remover a reserva da lista
+                    Arquivo.salvarReserva(listaReserva);
+                    System.out.println("Reserva cancelada: CPF: " + reserva.getCpf() + ", Data da reserva: " + reserva.getDataReserva());
+                    algumaReservaCancelada = true;
+                }
+            }
+        }
+
+        if (!algumaReservaCancelada) {
+            System.out.println("Não existem reservas com menos de 30 dias para serem excluídas.");
+        }
+    }
+
     @Override
     public String toString() {
         return "Reserva{" + "preliminar=" + preliminar + ", preco=" + preco + ", quarto=" + quarto + ", dias=" + dias + ", dataReserva=" + dataReserva + ", cartao=" + cartao + '}';
@@ -174,7 +201,7 @@ public class Reserva extends Agenda {
         Scanner scanner = new Scanner(System.in);
         ArrayList<Balancos> listaBalanco = new ArrayList();
         ArrayList<Reserva> listaReserva = new ArrayList();
-        listaBalanco =  Arquivo.lerBalanco();
+        listaBalanco = Arquivo.lerBalanco();
         listaReserva = (ArrayList<Reserva>) Arquivo.lerReserva();
 
         boolean menuLoop = true;
@@ -186,8 +213,9 @@ public class Reserva extends Agenda {
             System.out.println("[4] - Remover Reserva");
             System.out.println("[5] - Listar Reservas");
             System.out.println("[6] - Confirmar Reserva");
-            System.out.println("[7] - Despesas Cliente");
-            System.out.println("[8] - Sair");
+            System.out.println("[7] - Nova Despesa Cliente");
+            System.out.println("[8] - Remover Despesa Cliente");
+            System.out.println("[9] - Sair");
             System.out.println("Digite o que quer fazer: ");
             String escolha = scanner.nextLine();
             switch (escolha) {
@@ -218,7 +246,7 @@ public class Reserva extends Agenda {
                         System.out.println("Já existe uma reserva para a data e tipo de quarto informados!");
                         break; // Voltar ao menu principal
                     }
-
+                    Reserva.verificarReservasNaoConfirmadas(listaReserva);
                     System.out.println("Digite o total de dias para reservas: ");
                     int dias = scanner.nextInt();
                     scanner.nextLine();
@@ -343,7 +371,7 @@ public class Reserva extends Agenda {
                             if (y <= x) {
                                 r.setConfirmada();
                                 System.out.println("Valor R$" + (r.getPreco() / 2) + " , debitado no cartão cadastrado.");
-                                
+
                                 //Preenchendo o BALANÇO
                                 b.setCpf(r.getCpf());
                                 b.setConta(r.getConta());
@@ -351,7 +379,7 @@ public class Reserva extends Agenda {
                                 b.setMes(dataReservaCliente);
                                 listaBalanco.add(b);
                                 Arquivo.salvarBalanco(listaBalanco);
-                                
+
                                 listaReserva.remove(r);
                                 Arquivo.salvarReserva(listaReserva);
                             } else {
@@ -418,31 +446,76 @@ public class Reserva extends Agenda {
                     }
                 }
                 case "7": {
-                    System.out.println("======|Adicionar Dispesa|======");
-                     for (int i = 0; i < listaReserva.size(); i++) {
+                    System.out.println("======|Adicionar Despesa|======");
+                    for (int i = 0; i < listaReserva.size(); i++) {
                         Reserva resTemporaria = listaReserva.get(i);
                         System.out.println("[" + i + "]" + resTemporaria.getCpf());
                     }
 
-                    System.out.println("Digite o CPF do cliente para confirmar a reserva:");
+                    System.out.println("Digite o CPF do cliente para adicionar a despesa:");
                     String cpf = scanner.nextLine();
                     for (Reserva r : listaReserva) {
-
                         if (cpf.equals(r.getCpf())) {
-                            
                             System.out.println("Digite o valor da despesa: ");
                             Double conta = scanner.nextDouble();
                             Double contaAtual = r.getConta();
                             contaAtual += conta;
                             r.setConta(contaAtual);
                             Arquivo.salvarReserva(listaReserva);
-                            break;
-                        }
 
+                            // Criar uma nova instância de Balancos para adicionar ao ArrayList
+                            Balancos b = new Balancos();
+                            b.setCpf(r.getCpf());
+                            b.setConta(r.getConta());
+                            listaBalanco.add(b);
+                            Arquivo.salvarBalanco(listaBalanco);
+
+                            System.out.println("Foi adicionado R$" + conta + "ao cliente de CPF " + cpf);
+
+                        }
                     }
+                    break;
                 }
 
                 case "8": {
+                    System.out.println("======|Descontar Valor da Conta|======");
+                    for (int i = 0; i < listaReserva.size(); i++) {
+                        Reserva resTemporaria = listaReserva.get(i);
+                        System.out.println("[" + i + "] " + resTemporaria.getCpf());
+                    }
+
+                    System.out.println("Digite o CPF do cliente para descontar valor da conta:");
+                    String cpf = scanner.nextLine();
+
+                    for (Reserva r : listaReserva) {
+                        if (cpf.equals(r.getCpf())) {
+                            System.out.println("Valor atual da conta do cliente: R$ " + r.getConta());
+                            System.out.println("Digite o valor a ser descontado:");
+                            Double valorDesconto = scanner.nextDouble();
+
+                            if (r.getConta() >= valorDesconto) {
+                                Double novaConta = r.getConta() - valorDesconto;
+                                r.setConta(novaConta);
+                                Arquivo.salvarReserva(listaReserva);
+
+                                // Criar uma nova instância de Balancos para adicionar ao ArrayList
+                                Balancos b = new Balancos();
+                                b.setCpf(r.getCpf());
+                                b.setConta(r.getConta());
+                                listaBalanco.add(b);
+                                Arquivo.salvarBalanco(listaBalanco);
+                                System.out.println("Valor descontado com sucesso. Nova conta: R$ " + r.getConta());
+                            } else {
+                                System.out.println("Não é possível descontar um valor maior do que o saldo da conta.");
+                            }
+
+                            
+                        }
+                    }
+                    break;
+                }
+
+                case "9": {
                     menuLoop = false;
                     break;
                 }

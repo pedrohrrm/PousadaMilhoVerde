@@ -1,4 +1,3 @@
-
 package pousada;
 
 import java.util.Scanner;
@@ -20,9 +19,8 @@ public class Menu {
             System.out.println("[2] - Gerir Reservas");
             System.out.println("[3] - Consultar Agenda");
             System.out.println("[4] - Balanço Pousada");
-            System.out.println("[5] - Despesas diária quartos");
-            System.out.println("[6] - Gerir funcionários");
-            System.out.println("[7] - Sair");
+            System.out.println("[5] - Gerir funcionários");
+            System.out.println("[6] - Sair");
             System.out.println("Digite o que quer fazer: ");
             String escolha = scanner.nextLine();
 
@@ -40,23 +38,34 @@ public class Menu {
                     break;
                 }
                 case "3": {
-                    //MENU AGENDA
+                    System.out.println("Em Desenvolvimento");
                     break;
                 }
-                case "4":{
-                   Balancos b = new Balancos();
-                   b.menuBalanco();
-                   break;
+                case "4": {
+                    // Solicitar CPF e senha para autenticação do administrador
+                    System.out.println("Digite o CPF do administrador:");
+                    String cpfAdmin = scanner.nextLine();
+
+                    System.out.println("Digite a senha do administrador:");
+                    String senhaAdmin = scanner.nextLine();
+
+                    // Verificar se os dados do administrador estão corretas
+                    if (cpfAdmin.equals("98765432101") && senhaAdmin.equals("milhoverde")) {
+                        
+                        Balancos b = new Balancos();
+                        b.menuBalanco();
+                    } else {
+                        System.out.println("Credenciais inválidas. Acesso negado.");
+                    }
+                    break;
                 }
-                case "5":{
-                    
-                }
-                case "6": {
+                
+                case "5": {
                     Funcionario menu = new Funcionario();
                     menu.menuFuncionario();
                     break;
                 }
-                case "7": {
+                case "6": {
                     menuLoop = false;
                     break;
                 }

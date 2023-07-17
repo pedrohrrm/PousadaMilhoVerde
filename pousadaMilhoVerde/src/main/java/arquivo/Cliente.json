@@ -28,5 +28,15 @@
     "telefone": "2132132132132132132132",
     "nivelAcesso": false,
     "id": 0
+  },
+  {
+    "conta": 0.0,
+    "nome": "Lucas",
+    "endereco": "Rua x",
+    "email": "lucas@email.com",
+    "cpf": "456987456",
+    "telefone": "3254789654",
+    "nivelAcesso": false,
+    "id": 0
   }
 ]

@@ -172,7 +172,8 @@ public class Cliente extends Pessoa implements Comparator <Cliente>{
                     c.setEndereco(enderecoNovo);
                     c.setEmail(emailNovo);
                     c.setTelefone(telefoneNovo);
-
+listaCliente.add(c);
+                    Arquivo.salvarClientes(listaCliente);
                     break;
 
                 }
@@ -246,3 +247,9 @@ public class Cliente extends Pessoa implements Comparator <Cliente>{
 
    
 }
+
+
+
+
+
+

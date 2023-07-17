@@ -1,11 +1,8 @@
 package sistema;
 
-import arquivo.Arquivo;
 import java.util.ArrayList;
-import java.util.Collections;
 import pousada.Cliente;
 import pousada.Menu;
-import pousada.Reserva;
 
 /**
  *
@@ -14,11 +11,13 @@ import pousada.Reserva;
 public class Sistema {
 
     public static void main(String[] args) {
-//        //MENU CLIENTE
-//        Menu menu = new Menu();
-//        menu.menuGeral();
+        //MENU CLIENTE
+        Menu menu = new Menu();
+        menu.menuGeral();
+        
+        
 
-        // Questao 12
+        // Questao 123
         //{
 //    Quantidade de instâncias de Clientes.
         Cliente cliente1 = new Cliente("João Silva", "Rua A, 123", "joao.silva@example.com", "123.456.789-00", "(11) 1234-5678");
