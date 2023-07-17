@@ -18,6 +18,8 @@ public class Receita extends Agenda {
         return "Receita{" + "idVenda=" + idVenda + ", lucro=" + lucro + ", receita=" + receita + '}';
     }
 
+    
+
     public String getIdVenda() {
         return idVenda;
     }

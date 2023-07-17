@@ -9,6 +9,11 @@ import sistema.Balancos;
  */
 public class Menu {
 
+    @Override
+    public String toString() {
+        return "Menu{" + '}';
+    }
+
     public void menuGeral() {
         Scanner scanner = new Scanner(System.in);
 

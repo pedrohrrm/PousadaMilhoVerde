@@ -2,14 +2,13 @@ package pousada;
 
 import arquivo.Arquivo;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Scanner;
 
 /**
  *
  * @author Pedro Henrique
  */
-public class Cliente extends Pessoa implements Comparator <Cliente>{
+public class Cliente extends Pessoa{
 
     private double conta; //gastos do cliente
     private String codigo;
@@ -18,18 +17,20 @@ public class Cliente extends Pessoa implements Comparator <Cliente>{
 
     public Cliente() {
         numTotalInstancias = numTotalInstancias + 1;
-        numTotalInstanciasPrivado = numTotalInstanciasPrivado +1;
+        numTotalInstanciasPrivado = numTotalInstanciasPrivado + 1;
     }
-      public Cliente(String nome, String endereco, String email, String cpf, String telefone) {
+
+    public Cliente(String nome, String endereco, String email, String cpf, String telefone) {
         super(nome, endereco, email, cpf, telefone);
         numTotalInstancias = numTotalInstancias + 1;
-        numTotalInstanciasPrivado = numTotalInstanciasPrivado +1;
+        numTotalInstanciasPrivado = numTotalInstanciasPrivado + 1;
 
     }
 
     public static int getNumTotalInstanciasPrivado() {
         return numTotalInstanciasPrivado;
     }
+    
 
     public String getCodigo() {
         codigo = this.getCpf();
@@ -39,8 +40,7 @@ public class Cliente extends Pessoa implements Comparator <Cliente>{
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
-    //verificar se precisa de id ou se vai herdar
-    //fazer o toString
+    
 
     public double getConta() {
         return conta;
@@ -49,8 +49,6 @@ public class Cliente extends Pessoa implements Comparator <Cliente>{
     public void setConta(double conta) {
         this.conta = conta;
     }
-
-  
 
     public static int getNumTotalInstancias() {
         return numTotalInstancias;
@@ -75,6 +73,11 @@ public class Cliente extends Pessoa implements Comparator <Cliente>{
 
     public void verCliTelefone(int i) {
         System.out.println("Telefone do Cliente: ");
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" + "conta=" + conta + ", codigo=" + codigo + '}';
     }
 
 //ARRAYLIST E CRUD*******
@@ -172,7 +175,7 @@ public class Cliente extends Pessoa implements Comparator <Cliente>{
                     c.setEndereco(enderecoNovo);
                     c.setEmail(emailNovo);
                     c.setTelefone(telefoneNovo);
-listaCliente.add(c);
+                    listaCliente.add(c);
                     Arquivo.salvarClientes(listaCliente);
                     break;
 
@@ -202,7 +205,7 @@ listaCliente.add(c);
                         System.out.println("E-mail: " + cliTemporario.getEmail());
                         System.out.println("CPF: " + cliTemporario.getCpf());
                         System.out.println("Telefone: " + cliTemporario.getTelefone());
-                        
+
                     }
                 }
                 case "6": {
@@ -214,42 +217,6 @@ listaCliente.add(c);
 
         }
     }
-
-    @Override
-    public int compare(Cliente cliente1, Cliente cliente2) {
-//        int resultado = cliente1.getNome().compareTo(cliente2.getNome());
-//        if (resultado != 0) {
-//            return resultado;
-//        }
-
-        int resultado = cliente1.getEndereco().compareTo(cliente2.getEndereco());
-        if (resultado != 0) {
-            return resultado;
-        }
-
-        resultado = cliente1.getEmail().compareTo(cliente2.getEmail());
-        if (resultado != 0) {
-            return resultado;
-        }
-
-        resultado = cliente1.getCpf().compareTo(cliente2.getCpf());
-        if (resultado != 0) {
-            return resultado;
-        }
-
-        resultado = cliente1.getTelefone().compareTo(cliente2.getTelefone());
-        if (resultado != 0) {
-            return resultado;
-        }
-        
-        return Integer.compare(cliente1.getId(), cliente2.getId());
-    }
-
    
 }
-
-
-
-
-
-
+ 

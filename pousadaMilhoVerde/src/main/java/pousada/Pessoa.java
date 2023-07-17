@@ -17,8 +17,10 @@ public abstract class Pessoa {
 
     @Override
     public String toString() {
-        return "Pessoa{" + "nome=" + nome + ", endereco=" + endereco + ", email=" + email + ", cpf=" + cpf + ", telefone=" + telefone + ", nivelAcesso=" + nivelAcesso + ", id=" + id + '}';
+        return "Pessoa{" + "nome=" + nome + ", endereco=" + endereco + ", email=" + email + ", cpf=" + cpf + ", telefone=" + telefone + ", senha=" + senha + ", nivelAcesso=" + nivelAcesso + ", id=" + id + '}';
     }
+
+    
 
     public Pessoa() {
     }

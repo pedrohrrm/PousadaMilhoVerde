@@ -1,22 +1,19 @@
-
 package pousada;
-
-
-
 
 /**
  *
  * @author Pedro Henrique
  */
 public class Despesa extends Agenda {
-private String descricao;
+
+    private String descricao;
     private double valor;
     private String dataLancamento;
     private String mesLancamento;
 
     public Despesa() {
     }
-    
+
     public Despesa(String descricao, double valor, String dataLancamento, String mesLancamento) {
         this.descricao = descricao;
         this.valor = valor;
@@ -56,5 +53,9 @@ private String descricao;
         this.mesLancamento = mesLancamento;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Despesa{" + "descricao=" + descricao + ", valor=" + valor + ", dataLancamento=" + dataLancamento + ", mesLancamento=" + mesLancamento + '}';
+    }
+
 }

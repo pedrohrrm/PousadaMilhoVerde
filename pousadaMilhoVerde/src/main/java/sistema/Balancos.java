@@ -65,6 +65,11 @@ public class Balancos {
         this.preco = preco;
     }
 
+    @Override
+    public String toString() {
+        return "Balancos{" + "cpf=" + cpf + ", mes=" + mes + ", conta=" + conta + ", preco=" + preco + '}';
+    }
+
     public void menuBalanco() {
         Scanner scanner = new Scanner(System.in);
         ArrayList<Despesa> listaDepesaPousada = Arquivo.lerDespesaPousada();

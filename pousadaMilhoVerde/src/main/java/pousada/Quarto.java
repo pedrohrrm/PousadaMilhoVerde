@@ -27,6 +27,8 @@ public class Quarto {
         return "Quarto{" + "diaria=" + diaria + ", despesas=" + despesas + ", aptoLuxo=" + aptoLuxo + ", aptoSimples=" + aptoSimples + '}';
     }
 
+    
+
     public double getDiaria() {
         return diaria;
     }

@@ -193,7 +193,7 @@ public class Reserva extends Agenda {
 
     @Override
     public String toString() {
-        return "Reserva{" + "preliminar=" + preliminar + ", preco=" + preco + ", quarto=" + quarto + ", dias=" + dias + ", dataReserva=" + dataReserva + ", cartao=" + cartao + '}';
+        return "Reserva{" + "preliminar=" + preliminar + ", preco=" + preco + ", quarto=" + quarto + ", dias=" + dias + ", dataReserva=" + dataReserva + ", cartao=" + cartao + ", tipoQuarto=" + tipoQuarto + ", confirmada=" + confirmada + ", dataConfirmacao=" + dataConfirmacao + '}';
     }
 
     //CRUD DA RESERVA.
@@ -509,7 +509,6 @@ public class Reserva extends Agenda {
                                 System.out.println("Não é possível descontar um valor maior do que o saldo da conta.");
                             }
 
-                            
                         }
                     }
                     break;
@@ -523,4 +522,5 @@ public class Reserva extends Agenda {
 
         }
     }
+
 }
