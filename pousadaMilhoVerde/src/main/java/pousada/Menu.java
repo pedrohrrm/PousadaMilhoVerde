@@ -4,7 +4,7 @@ import java.util.Scanner;
 import sistema.Balancos;
 
 /**
- *
+ * Classe que representa um cliente da Pousada Milho Verde.
  * @author Pedro Henrique
  */
 public class Menu {
@@ -13,7 +13,12 @@ public class Menu {
     public String toString() {
         return "Menu{" + '}';
     }
-
+/**
+ * Cria um novo objeto da classe.
+ * 
+ * Este é o construtor padrão da classe. Ele cria uma instância
+ * vazia da classe com os valores padrão para os atributos.
+ */
     public void menuGeral() {
         Scanner scanner = new Scanner(System.in);
 

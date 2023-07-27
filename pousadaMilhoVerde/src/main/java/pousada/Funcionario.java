@@ -6,13 +6,29 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
+ *  * Classe que representa um Funcionário da Pousada Milho Verde.
  *
  * @author Pedro Henrique
  */
 public class Funcionario extends Pessoa {
+    
+    /**
+ * Cria um novo objeto da classe.
+ * 
+ * Este é o construtor padrão da classe. Ele cria uma instância
+ * vazia da classe com os valores padrão para os atributos.
+ */
     public Funcionario() {
     }
-
+/**
+ * Cria um novo objeto da classe.
+ * Construtor com parametros
+ * @param nome é o nome do funcionário
+ * @param cpf é o cpf do funcionário
+ * @param nivelAcesso é o nível de acesso da conta
+ * @param id é o id
+ */
+ 
     public Funcionario(String nome, String cpf, boolean nivelAcesso, int id) {
         super(nome, cpf, nivelAcesso = false, id);
     }

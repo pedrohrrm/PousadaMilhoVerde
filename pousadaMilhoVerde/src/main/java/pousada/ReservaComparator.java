@@ -7,7 +7,7 @@ package pousada;
 import java.util.Comparator;
 
 /**
- *
+ * Classe que representa um cliente da Pousada Milho Verde.
  * @author Pedro Henrique
  */
 public class ReservaComparator implements Comparator<Reserva> {

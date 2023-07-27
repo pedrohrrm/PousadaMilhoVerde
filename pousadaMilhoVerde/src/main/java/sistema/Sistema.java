@@ -13,7 +13,7 @@ import pousada.Reserva;
 import pousada.ReservaComparator;
 
 /**
- *
+ *  Classe que representa um cliente da Pousada Milho Verde.
  * @author Pedro Henrique
  */
 public class Sistema {

@@ -14,7 +14,7 @@ import java.util.Scanner;
 import sistema.Balancos;
 
 /**
- *
+ * Classe que representa um cliente da Pousada Milho Verde.
  * @author Pedro Henrique
  */
 public class Reserva extends Agenda {
@@ -30,12 +30,29 @@ public class Reserva extends Agenda {
     private boolean confirmada;
     private String dataConfirmacao;
 
+    /**
+ * Cria um novo objeto da classe.
+ * 
+ * Este é o construtor padrão da classe. Ele cria uma instância
+ * vazia da classe com os valores padrão para os atributos.
+ */
     public Reserva() {
         this.preliminar = true;
         numTotalInstanciasRes = numTotalInstanciasRes + 1;
         numTotalInstanciasPrivadoRes = numTotalInstanciasPrivadoRes + 1;
     }
-
+/**
+ * Cria um novo objeto da classe.
+ * Construtor com parametros
+ * @param preliminar é o tipo de reserva
+ * @param preco é o preço da reserva
+ * @param quarto  é o numero do quarto
+ * @param dias é a quantidade de dias
+ * @param dataReserva é a data da reserva
+ * @param cartao é o número do cartão
+ * @param tipoQuarto é o tipo do quarto (Luxo e Simples)
+ */
+ 
     public Reserva(boolean preliminar, double preco, int quarto, int dias, String dataReserva, String cartao, String tipoQuarto) {
         this.preliminar = preliminar;
         this.preco = preco;
@@ -48,76 +65,142 @@ public class Reserva extends Agenda {
         numTotalInstanciasRes = numTotalInstanciasRes + 1;
         numTotalInstanciasPrivadoRes = numTotalInstanciasPrivadoRes + 1;
     }
-
+/**
+ * 
+ * @return O valor resultante da operação.
+ */
     public static int getNumTotalInstanciasPrivadoRes() {
         return numTotalInstanciasPrivadoRes;
     }
-
+/**
+ * Retorna o valor associado a alguma operação.
+ * 
+ * @return O valor resultante da operação.
+ */
     public int getDias() {
         return dias;
     }
-
+/**
+ * 
+ * @param dias 
+ */
     public void setDias(int dias) {
         this.dias = dias;
     }
-
+/**
+ * Retorna o valor associado a alguma operação.
+ * 
+ * @return O valor resultante da operação.
+ */
     public boolean getConfirmada() {
         return this.confirmada;
     }
-
+/**
+ * Retorna o valor associado a alguma operação.
+ * 
+ */
     public void setConfirmada() {
         this.confirmada = true;
     }
-
+/**
+ * Retorna o valor associado a alguma operação.
+ * 
+ * @return O valor resultante da operação.
+ */
     public String getDataReserva() {
         return dataReserva;
     }
-
+/**
+ * 
+ * @param dataReserva 
+ */
     public void setDataReserva(String dataReserva) {
         this.dataReserva = dataReserva;
     }
-
+/**
+ * Retorna o valor associado a alguma operação.
+ * 
+ * @return O valor resultante da operação.
+ */
     public boolean isPreliminar() {
         return preliminar;
     }
-
+/**
+ * 
+ * @param preliminar 
+ */
     public void setPreliminar(boolean preliminar) {
         this.preliminar = preliminar;
     }
-
+ /**
+ * Retorna o valor associado a alguma operação.
+ * 
+ * @return O valor resultante da operação.
+ */
     public double getPreco() {
 
         return preco;
     }
-
+/**
+ * 
+ * @param preco 
+ */
     public void setPreco(double preco) {
         this.preco = preco;
     }
-
+/**
+ * Retorna o valor associado a alguma operação.
+ * 
+ * @return O valor resultante da operação.
+ */
     public int getQuarto() {
         return quarto;
     }
-
+/**
+ * 
+ * @param quarto 
+ */
     public void setQuarto(int quarto) {
         this.quarto = quarto;
     }
-
+/**
+ * Retorna o valor associado a alguma operação.
+ * 
+ * @return O valor resultante da operação.
+ */
     public String getCartao() {
         return cartao;
     }
-
+/**
+ * 
+ * @param cartao 
+ */
     public void setCartao(String cartao) {
         this.cartao = cartao;
     }
-
+/**
+ * Retorna o valor associado a alguma operação.
+ * 
+ * @return O valor resultante da operação.
+ */
+ 
     public String getTipoQuarto() {
         return tipoQuarto;
     }
-
+/**
+ * 
+ * @param tipoQuarto 
+ */
     public void setTipoQuarto(String tipoQuarto) {
         this.tipoQuarto = tipoQuarto;
     }
-
+/**
+ * 
+ * @param listaReservas
+ * @param dataReserva
+ * @param tipoQuarto
+ * @return 
+ */
     public static boolean verificarReservaExistente(List<Reserva> listaReservas, String dataReserva, String tipoQuarto) {
         LocalDate dataReservaLocalDate = LocalDate.parse(dataReserva, DateTimeFormatter.ofPattern("ddMMyyyy"));
         for (Reserva reserva : listaReservas) {

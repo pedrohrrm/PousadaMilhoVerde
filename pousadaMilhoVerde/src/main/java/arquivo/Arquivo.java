@@ -21,19 +21,18 @@ import pousada.Reserva;
 import sistema.Balancos;
 
 /**
- *
+ * Descrição da classe Arquivo.
+ * 
  * @author Pedro Henrique
  */
-public class Arquivo {
 
+public class Arquivo {
     private static final String END_ARQ_CLIENTE = "./src/main/java/arquivo/Cliente.json";
     private static final String END_ARQ_RESERVA = "./src/main/java/arquivo/Reserva.json";
     private static final String END_ARQ_COLABORADOR = "./src/main/java/arquivo/Funcionario.json";    
     private static final String END_ARQ_PROPRIETARIO = "./src/main/java/arquivo/Proprietario.json";
     private static final String END_ARQ_BALANCO = "./src/main/java/arquivo/Balanco.json";
     private static final String END_ARQ_DESPESAPOUSADA = "./src/main/java/arquivo/Despesapousada.json";
-
-
 
     public static void salvarClientes(List<Cliente> listaCliente) {
         // Converter a lista de clientes para JSON usando Gson

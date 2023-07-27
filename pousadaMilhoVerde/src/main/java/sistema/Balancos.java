@@ -12,7 +12,7 @@ import pousada.Despesa;
 import pousada.Reserva;
 
 /**
- *
+  * Classe que representa um cliente da Pousada Milho Verde.
  * @author Pedro Henrique
  */
 public class Balancos {
@@ -22,45 +22,86 @@ public class Balancos {
     private double conta;
     private double preco;
 
+    /**
+ * Cria um novo objeto da classe.
+ * 
+ * Este é o construtor padrão da classe. Ele cria uma instância
+ * vazia da classe com os valores padrão para os atributos.
+ */
     public Balancos() {
 
     }
-
+/**
+ * 
+ * @param cpf é o cpf do balanco
+ * @param mes é o mes do balanco
+ * @param conta é a conta gerada
+ * @param preco  é o preco gerado
+ */
+    
     public Balancos(String cpf, String mes, double conta, double preco) {
         this.cpf = cpf;
         this.mes = mes;
         this.conta = conta;
         this.preco = preco;
     }
-
+/**
+ * Retorna o valor associado a alguma operação.
+ * 
+ * @return O valor resultante da operação.
+ */
     public String getCpf() {
         return cpf;
     }
-
+/**
+ * 
+ * @param cpf 
+ */
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-
+/**
+ * Retorna o valor associado a alguma operação.
+ * 
+ * @return O valor resultante da operação.
+ */
     public String getMes() {
         return mes;
     }
-
+/**
+ * 
+ * @param mes 
+ */
     public void setMes(String mes) {
         this.mes = mes;
     }
-
+/**
+ * Retorna o valor associado a alguma operação.
+ * 
+ * @return O valor resultante da operação.
+ */
     public double getConta() {
         return conta;
     }
-
+/**
+ * 
+ * @param conta 
+ */
     public void setConta(double conta) {
         this.conta = conta;
     }
-
+/**
+ * Retorna o valor associado a alguma operação.
+ * 
+ * @return O valor resultante da operação.
+ */
     public double getPreco() {
         return preco;
     }
-
+/**
+ * 
+ * @param preco 
+ */
     public void setPreco(double preco) {
         this.preco = preco;
     }

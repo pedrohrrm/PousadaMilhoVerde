@@ -5,8 +5,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
+ *  * Classe que representa um cliente da Pousada Milho Verde.
  *
- * @author Pedro Henrique
+ * @author Pedro Henrique - UFVJM
  */
 public class Cliente extends Pessoa{
 
@@ -15,54 +16,101 @@ public class Cliente extends Pessoa{
     protected static int numTotalInstancias = 0;
     private static int numTotalInstanciasPrivado = 0;
 
+    /**
+ * Cria um novo objeto da classe.
+ * 
+ * Este é o construtor padrão da classe. Ele cria uma instância
+ * vazia da classe com os valores padrão para os atributos.
+ */
     public Cliente() {
         numTotalInstancias = numTotalInstancias + 1;
         numTotalInstanciasPrivado = numTotalInstanciasPrivado + 1;
     }
-
+/**
+ * Cria um novo objeto da classe.
+ * @param nome é o nome do cliente
+ * @param endereco é o endereço do cliente
+ * @param email é o email do cliente
+ * @param cpf é o cpf do cliente
+ * @param telefone é o telefone do cliente
+ * 
+ */
+ 
     public Cliente(String nome, String endereco, String email, String cpf, String telefone) {
         super(nome, endereco, email, cpf, telefone);
         numTotalInstancias = numTotalInstancias + 1;
         numTotalInstanciasPrivado = numTotalInstanciasPrivado + 1;
 
     }
-
+/**
+ * Retorna o valor associado a alguma operação.
+ * 
+ * @return O valor resultante da operação.
+ */
     public static int getNumTotalInstanciasPrivado() {
         return numTotalInstanciasPrivado;
     }
-    
+/**
+ * Retorna o valor associado a alguma operação.
+ * 
+ * @return O valor resultante da operação.
+ */  
 
     public String getCodigo() {
         codigo = this.getCpf();
         return codigo;
     }
-
+/**
+ * 
+ * @param codigo 
+ */
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
     
-
+/**
+ * Retorna o valor associado a alguma operação.
+ * 
+ * @return O valor resultante da operação.
+ */
     public double getConta() {
         return conta;
     }
-
+/**
+ * 
+ * @param conta 
+ */
     public void setConta(double conta) {
         this.conta = conta;
     }
-
+/**
+ * Retorna o valor associado a alguma operação.
+ * 
+ * @return O valor resultante da operação.
+ */
     public static int getNumTotalInstancias() {
         return numTotalInstancias;
     }
 
 //MÉTODOS PARA IMPRIMIR AS INFORMAÇÕES
+   /**
+    * 
+    * @param i 
+    */ 
     public void verCliNome(int i) {
         System.out.println("Nome do Cliente: ");
     }
-
+/**
+ * 
+ * @param i 
+ */
     public void verCliEndereco(int i) {
         System.out.println("Endereço do Cliente: ");
     }
-
+/**
+ * 
+ * @param i 
+ */
     public void verCliEmail(int i) {
         System.out.println("E-mail do Cliente: ");
     }
@@ -70,7 +118,10 @@ public class Cliente extends Pessoa{
     public void verCliCpf(int i) {
         System.out.println("CPF do Cliente: ");
     }
-
+/**
+ * 
+ * @param i 
+ */
     public void verCliTelefone(int i) {
         System.out.println("Telefone do Cliente: ");
     }
